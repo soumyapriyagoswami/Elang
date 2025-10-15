@@ -61,4 +61,9 @@ Hello, EasyLang!
 
 You can experiment with variables, loops, and functions following EasyLang’s simple syntax. More examples will be added soon.
 
+## Documentation
+
+Full documentation is available as a PDF:
+
+[Download EasyLang Documentation](docs/EasyLang_Documentation.pdf)
 
