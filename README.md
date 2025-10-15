@@ -65,5 +65,5 @@ You can experiment with variables, loops, and functions following EasyLang’s s
 
 Full documentation is available as a PDF:
 
-[Download EasyLang Documentation](docs/EasyLang_Documentation.pdf)
+[Download EasyLang Documentation](documentation/EasyLang_Documentation.pdf)
 
