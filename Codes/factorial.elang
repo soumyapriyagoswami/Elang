@@ -1,0 +1,7 @@
+set n to 8
+set fact to 1
+while n > 0 do
+    set fact to fact * n
+    set n to n - 1
+end
+print fact

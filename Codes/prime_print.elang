@@ -1,0 +1,16 @@
+set limit to 1000
+set i to 2
+while i <= limit do
+    set is_prime to 1
+    set j to 2
+    while j * j <= i and is_prime == 1 do
+        if i % j == 0 then
+            set is_prime to 0
+        end
+        set j to j + 1
+    end
+    if is_prime == 1 then
+        print i
+    end
+    set i to i + 1
+end

@@ -1,0 +1,7 @@
+set sum to 0
+set i to 1
+while i <= 5 do
+    set sum to sum + i * i
+    set i to i + 1
+end
+print sum

@@ -1,0 +1,13 @@
+print "Enter a number for prime factorization:"
+read num
+set i to 2
+while i * i <= num do
+while num % i == 0 do
+print i
+        set num to num / i
+    end
+    set i to i + 1
+end
+if num > 1 then
+    print num
+end

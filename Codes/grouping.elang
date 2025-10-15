@@ -1,0 +1,4 @@
+set a to 10
+set b to -5
+set result to (a + b) * 2
+print result

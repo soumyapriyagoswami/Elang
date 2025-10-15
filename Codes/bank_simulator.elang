@@ -1,0 +1,61 @@
+# Simple Bank Simulator in EasyLang
+# Features: Check balance, Deposit, Withdraw, Quit
+# Starts with $0 balance
+# Quit by entering 0
+
+set balance to 0
+set quit to 0
+while quit == 0 do
+    print "=== Bank Menu ==="
+    print "1: Check Balance"
+    print "2: Deposit"
+    print "3: Withdraw"
+    print "0: Quit"
+    print "Enter choice:"
+    read choice
+
+    if choice == 1 then
+        print "Your balance: $" + balance
+        print "Press enter to continue..."
+        read dummy
+    else
+        if choice == 2 then
+            print "Enter deposit amount:"
+            read amount
+            if amount > 0 then
+                set balance to balance + amount
+                print "Deposited $" + amount + ". New balance: $" + balance
+            else
+                print "Invalid amount. Must be positive."
+            end
+            print "Press enter to continue..."
+            read dummy
+        else
+            if choice == 3 then
+                print "Enter withdraw amount:"
+                read amount
+                if amount > 0 and amount <= balance then
+                    set balance to balance - amount
+                    print "Withdrew $" + amount + ". New balance: $" + balance
+                else
+                    if amount <= 0 then
+                        print "Invalid amount. Must be positive."
+                    else
+                        print "Insufficient funds. Balance: $" + balance
+                    end
+                end
+                print "Press enter to continue..."
+                read dummy
+            else
+                if choice == 0 then
+                    set quit to 1
+                    print "Thank you for banking with us!"
+                else
+                    print "Invalid choice. Try again."
+                    print "Press enter to continue..."
+                    read dummy
+                end
+            end
+        end
+    end
+end

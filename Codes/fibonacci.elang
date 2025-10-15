@@ -1,0 +1,15 @@
+# Fibonacci Sequence Generator in EasyLang
+# Generates first n Fibonacci numbers (user input for n)
+
+print "Enter the number of Fibonacci terms:"
+     read n
+set a to 0
+set b to 1
+set i to 0
+while i < n do
+print a
+set temp to a + b
+    set a to b
+    set b to temp
+    set i to i + 1
+end

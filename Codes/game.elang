@@ -1,0 +1,64 @@
+# Simple Menu-Driven Game in EasyLang
+# Options: 1 - Play Number Guessing Game, 2 - View Scores, 3 - Quit
+# High scores are hardcoded for demo
+
+set quit to 0
+while quit == 0 do
+    print "=== Game Menu ==="
+    print "1: Play Number Guessing Game"
+    print "2: View High Scores"
+    print "3: Quit"
+    print "Enter choice:"
+    read choice
+
+    if choice == 1 then
+        # Number Guessing Game: Guess a number between 1-100
+        set secret to 42  # Hardcoded secret number
+        set attempts to 0
+        set guess to -1  # Initialize to invalid value to enter loop
+        print "Guess the number between 1 and 100! (Enter 0 to give up)"
+        while guess != secret and guess != 0 do
+            print "Enter your guess:"
+            read guess
+            if guess != secret and guess != 0 then
+                set attempts to attempts + 1
+                if guess < secret then
+                    print "Too low! Try higher."
+                else
+                    print "Too high! Try lower."
+                end
+            end
+        end
+        if guess == secret then
+            print "Correct! You guessed it in " + attempts + " attempts."
+            # Simple score (lower attempts = higher score)
+            set score to 100 - (attempts * 5)
+            if score < 0 then
+                set score to 0
+            end
+            print "Your score: " + score
+        else
+            print "You gave up. The number was " + secret + "."
+        end
+        print "Press enter to continue..."
+        read dummy  # Pause with dummy read (enter a number like 0 to continue)
+    else
+        if choice == 2 then
+            print "=== High Scores ==="
+            print "1. Player1 - 95"
+            print "2. Player2 - 87"
+            print "3. Player3 - 76"
+            print "Press enter to continue..."
+            read dummy  # Pause
+        else
+            if choice == 3 then
+                set quit to 1
+                print "Thanks for playing!"
+            else
+                print "Invalid choice. Try again."
+                print "Press enter to continue..."
+                read dummy  # Pause
+            end
+        end
+    end
+end

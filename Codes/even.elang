@@ -1,0 +1,7 @@
+set num to 0
+while num <= 10 do
+    if num % 2 == 0 then
+        print num
+    end
+    set num to num + 1
+end

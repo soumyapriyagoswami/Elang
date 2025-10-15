@@ -1,0 +1,5 @@
+set x to 0
+while x < 10 do
+    print x
+    set x to x + 1
+end

@@ -1,0 +1,2 @@
+set greeting to "Hello, World!"
+print greeting

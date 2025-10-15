@@ -1,0 +1,9 @@
+set i to 1
+while i <= 3 do
+    set j to 1
+    while j <= 3 do
+        print i * j
+        set j to j + 1
+    end
+    set i to i + 1
+end
