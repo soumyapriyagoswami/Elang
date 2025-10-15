@@ -61,4 +61,4 @@ Hello, EasyLang!
 
 You can experiment with variables, loops, and functions following EasyLang’s simple syntax. More examples will be added soon.
 
-License
+
