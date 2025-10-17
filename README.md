@@ -187,7 +187,14 @@ hanoi(3, "A", "C", "B")
 ```
 ## 🤝 Contributing
 
-We welcome contributions from everyone! 🚀
+<p align="center">
+  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome">
+  <img src="https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg?style=for-the-badge" alt="Open Source Love">
+  <img src="https://img.shields.io/badge/Contributions-Encouraged-blue.svg?style=for-the-badge" alt="Contributions Encouraged">
+  <img src="https://img.shields.io/badge/Made%20with-%F0%9F%92%9A%20Passion-yellow.svg?style=for-the-badge" alt="Made with Passion">
+</p>
+
+We welcome contributions from everyone! 🚀  
 
 Here’s how you can help improve **EasyLang**:
 
@@ -202,3 +209,4 @@ Let’s make coding education easier together ❤️
 
 ### 🌟 Start coding in minutes, not hours.  
 **Experience the simplicity of EasyLang today! 🚀**
+
