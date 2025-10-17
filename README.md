@@ -1,13 +1,11 @@
- <h1 align="center" style="font-weight:700;">
-  🌈 <span style="color:#6a5acd;">EasyLang</span> — 
-  <i>The Language That Thinks Like You</i>
-</h1>
+<h1 align="center">🌈 <b>EasyLang — The Language That Thinks Like You</b></h1>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Made%20with-C99-orange.svg">
+  <img src="https://img.shields.io/badge/License-BSD%202--Clause-blue.svg">
+  <img src="https://img.shields.io/badge/Platform-Linux%20|%20macOS%20|%20Windows-green.svg">
+</p>
 
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](LICENSE)
-[![Made with C](https://img.shields.io/badge/Made%20with-C99-orange.svg)](#)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20|%20macOS%20|%20Windows-green.svg)](#)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](#)
 
 ---
 
