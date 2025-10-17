@@ -39,7 +39,7 @@ while quit == 0 do
             print "Your score: " + score
         else
             print "You gave up. The number was " + secret + "."
-        end
+         end
         print "Press enter to continue..."
         read dummy  # Pause with dummy read (enter a number like 0 to continue)
     else

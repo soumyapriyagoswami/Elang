@@ -1,0 +1,11 @@
+function reverse_digits(num, reversed) {
+    if num == 0 then
+        return reversed
+    end
+    set last_digit to num % 10
+    set remaining to (num - last_digit) / 10
+    return reverse_digits(remaining, reversed * 10 + last_digit)
+}
+
+print "Reverse of 1234: "
+print reverse_digits(1234, 0)  # Should print 4321

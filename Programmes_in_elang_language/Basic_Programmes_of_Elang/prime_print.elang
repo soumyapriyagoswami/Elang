@@ -1,4 +1,4 @@
-set limit to 1000
+set limit to 100
 set i to 2
 while i <= limit do
     set is_prime to 1

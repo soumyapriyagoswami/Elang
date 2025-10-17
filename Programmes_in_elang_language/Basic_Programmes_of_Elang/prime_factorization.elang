@@ -6,8 +6,7 @@ while num % i == 0 do
 print i
         set num to num / i
     end
-    set i to i + 1
+                                                                                    set i to i + 1
 end
-if num > 1 then
-    print num
+if num > 1 then print num
 end

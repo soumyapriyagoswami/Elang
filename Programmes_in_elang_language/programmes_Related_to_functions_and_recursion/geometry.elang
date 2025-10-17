@@ -1,0 +1,65 @@
+# Geometry calculation functions with sqrt implementation
+
+function sqrt(n) {
+    if n == 0 then
+        return 0
+    end
+    if n < 0 then
+        return -1  # Error case
+    end
+    
+    set guess to n / 2
+    set i to 0
+    while i <. 20 do  # 20 iterations for reasonable accuracyset guess to (guess + n / guess) / 2
+                                                                                                          set i to i + 1
+    end
+    return guess
+}
+
+function circle_area(radius) {
+    return 3.14159 * radius * radius
+}
+
+function rectangle_area(length, width) {
+    return length * width
+}
+
+function triangle_area(base, height) {
+    return 0.5 * base * height
+}
+
+function distance(x1, y1, x2, y2) {
+    set dx to x2 - x1
+    set dy to y2 - y1
+    return sqrt(dx * dx + dy * dy)
+}
+
+function is_triangle(a, b, c) {
+    if a + b > c and a + c > b and b + c > a then
+        return 1
+    else
+        return 0
+    end
+}
+
+# Test geometry functions
+print "Geometry Functions:"
+print "Circle area (r=5): "
+print circle_area(5)
+print "Rectangle area (4x6): "
+print rectangle_area(4, 6)
+print "Triangle area (base=8, height=5): "
+print triangle_area(8, 5)
+print "Distance between (1,1) and (4,5): "
+print distance(1, 1, 4, 5)
+print "Can sides 3,4,5 form triangle? "
+print is_triangle(3, 4, 5)
+
+# Test sqrt function separately
+print "Square root tests:"
+print "sqrt(25) = "
+print sqrt(25)
+print "sqrt(2) = "
+print sqrt(2)
+print "sqrt(100) = "
+print sqrt(100)

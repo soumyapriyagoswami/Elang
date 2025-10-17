@@ -1,0 +1,15 @@
+# Arithmetic Calculator with Non-Recursive Function
+function compute(a, b) {
+    set sum to a + b
+    set diff to a - b
+    set prod to a * b
+    print "Sum: " + sum
+    print "Difference: " + diff
+    print "Product: " + prod
+}
+print "Enter two numbers for arithmetic operations:"
+print "First number:"
+read num1
+print "Second number:"
+read num2
+compute(num1, num2)

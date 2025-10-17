@@ -1,0 +1,22 @@
+# Average Calculator with Function
+# Tracks calculations with global variable
+
+set calc_count to 0
+
+function average(a, b, c) {
+    set sum to a + b + c  # Local variable
+    set result to sum / 3
+    set calc_count to calc_count + 1  # Update global
+    return result
+}
+
+print "Enter three numbers to compute their average:"
+print "Number 1:"
+read num1
+print "Number 2:"
+read num2
+print "Number 3:"
+read num3
+set result to average(num1, num2, num3)
+print "Average of " + num1 + ", " + num2 + ", " + num3 + " is " + result
+print "Total calculations: " + calc_count

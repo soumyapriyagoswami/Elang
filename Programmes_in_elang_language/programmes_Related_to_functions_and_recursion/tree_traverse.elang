@@ -1,0 +1,19 @@
+function traverse_depth(current_depth, max_depth) {
+    if current_depth > max_depth then
+        return 0
+    end
+    
+    print "Entering depth "
+    print current_depth
+    
+    set count to 1
+    set count to count + traverse_depth(current_depth + 1, max_depth)
+    set count to count + traverse_depth(current_depth + 1, max_depth)
+    
+    print "Leaving depth "
+    print current_depth
+    return count
+}
+
+print "Total nodes visited: "
+print traverse_depth(0, 2)

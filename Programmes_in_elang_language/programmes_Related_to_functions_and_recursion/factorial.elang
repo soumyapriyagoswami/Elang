@@ -1,0 +1,9 @@
+function fact(n){
+    if n <= 1 then
+        return 1
+    end
+    return n * fact(n - 1)
+}
+
+print "Factorial of 6 is: "
+print fact(6)

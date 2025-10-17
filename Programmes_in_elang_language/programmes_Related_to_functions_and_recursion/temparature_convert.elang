@@ -1,0 +1,9 @@
+# Temperature Converter with Non-Recursive Function
+function celsius_to_fahrenheit(c) {
+    set f to c * 9 / 5 + 32
+    return f
+}
+print "Enter temperature in Celsius:"
+read celsius
+set result to celsius_to_fahrenheit(celsius)
+print celsius + " degree C is " + result + " degree F"

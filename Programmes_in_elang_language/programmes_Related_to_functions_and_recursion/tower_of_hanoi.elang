@@ -1,0 +1,33 @@
+# Tower of Hanoi - SINGLE LINE OUTPUT
+
+function hanoi(n, from_rod, to_rod, aux_rod) {
+    if n == 1 then
+        print "Move disk 1 from rod 1 to rod 3"
+    else
+        hanoi(n - 1, from_rod, aux_rod, to_rod)
+        print "Move disk "
+        print n
+        print " from rod 1 to rod 3"
+        hanoi(n - 1, aux_rod, to_rod, from_rod)
+    end
+}
+
+print "TOWER OF HANOI"
+print "Enter number of disks: "
+read disks
+
+if disks > 0 then
+    # Calculate total moves using formula: 2^n - 1
+    set total_moves to 1
+    set i to 0
+    while i < disks do
+        set total_moves to total_moves * 2
+        set i to i + 1
+    end
+    set total_moves to total_moves - 1
+    
+    print "Expected total moves: "
+    print total_moves
+    print "Solution:"
+    hanoi(disks, 1, 3, 2)
+end

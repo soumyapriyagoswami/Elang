@@ -1,0 +1,9 @@
+function power(base, exponent) {
+    if exponent == 0 then
+        return 1
+    end
+    return base * power(base, exponent - 1)
+}
+
+print "2^5 = "
+print power(2, 5)

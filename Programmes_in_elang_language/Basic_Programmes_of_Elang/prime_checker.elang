@@ -1,11 +1,7 @@
 # Prime Checker in EasyLang with User Input
 
-print "Enter a number to check if prime:"
-read num
-set is_prime to 1
-if num <= 1 then
-    set is_prime to 0
-else
+print "Enter a number to check if prime:"read numset is_prime to 1if num <= 1 then
+set is_prime to 0 else
     set i to 2
     while i * i <= num and is_prime == 1 do
         if num % i == 0 then

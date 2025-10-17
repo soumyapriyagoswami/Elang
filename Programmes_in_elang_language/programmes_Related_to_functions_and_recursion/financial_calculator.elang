@@ -1,0 +1,30 @@
+# Financial calculation functions
+
+function simple_interest(principal, rate, time) {
+    return principal * rate * time / 100
+}
+
+function compound_interest(principal, rate, time) {
+    set amount to principal
+    set i to 0
+    while i < time do
+        set interest to amount * rate / 100
+        set amount to amount + interest
+        set i to i + 1
+    end
+    return amount - principal
+}
+
+function profit_percentage(cost_price, selling_price) {
+    set profit to selling_price - cost_price
+    return profit / cost_price * 100
+}
+
+# Test financial functions
+print "Financial Functions:"
+print "Simple Interest (1000 at 5% for 2 years): "
+print simple_interest(1000, 5, 2)
+print "Compound Interest (1000 at 5% for 2 years): "
+print compound_interest(1000, 5, 2)
+print "Profit % (CP=800, SP=1000): "
+print profit_percentage(800, 1000)
