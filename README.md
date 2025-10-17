@@ -1,4 +1,8 @@
- 🌈 EasyLang — The Language That Thinks Like You  
+ <h1 align="center" style="font-weight:700;">
+  🌈 <span style="color:#6a5acd;">EasyLang</span> — 
+  <i>The Language That Thinks Like You</i>
+</h1>
+
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](LICENSE)
 [![Made with C](https://img.shields.io/badge/Made%20with-C99-orange.svg)](#)
