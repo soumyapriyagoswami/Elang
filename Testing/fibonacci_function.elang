@@ -1,0 +1,29 @@
+# Fibonacci Calculator with Recursive Function
+# Tracks recursive calls with global variable
+
+set fib_calls to 0
+
+function fibonacci(n) {
+    set fib_calls to fib_calls + 1
+    if n <= 1 then
+        return n
+    end
+    set fib1 to fibonacci(n - 1)
+    set fib2 to fibonacci(n - 2)
+    set result to fib1 + fib2
+    return result
+}
+
+print "Enter a non-negative number for Fibonacci:"
+read num
+if num >= 0 then
+    set result to fibonacci(num)
+    print "Fibonacci(" 
+    print num
+    print ") = "
+    print result
+    print "Number of recursive calls: "
+    print fib_calls
+else
+    print "Please enter a non-negative number."
+end

@@ -1,5 +1,5 @@
 /* easylang.c
-   Enhanced EasyLang interpreter with fixed recursive return handling (C99)
+   Enhanced EasyLang interpreter with FOR loop + STEP (C99)
    Build: gcc -std=c99 -O2 -lm -o easylang easylang.c
    Run: ./easylang program.elang
 */
@@ -35,6 +35,8 @@ typedef enum {
     T_RETURN,   // return
     T_LBRACE,   // {
     T_RBRACE,   // }
+    T_FOR,      // for
+    T_FROM,     // from
     T_COMMA,    // ,
     T_UNKNOWN
 } TokenType;
@@ -162,6 +164,9 @@ static Token next_token(Lexer *lx) {
             if (strcmp(t.text, "and") == 0) { free(t.text); return make_token(T_AND, NULL); }
             if (strcmp(t.text, "function") == 0) { free(t.text); return make_token(T_FUNCTION, NULL); }
             if (strcmp(t.text, "return") == 0) { free(t.text); return make_token(T_RETURN, NULL); }
+            if (strcmp(t.text, "for") == 0) { free(t.text); return make_token(T_FOR, NULL); }
+            if (strcmp(t.text, "from") == 0) { free(t.text); return make_token(T_FROM, NULL); }
+            if (strcmp(t.text, "step") == 0) { free(t.text); return make_token(T_IDENTIFIER, "step"); }
         }
         return t;
     }
@@ -207,7 +212,9 @@ typedef struct { ValueType type; double num; char *str; } Value;
 
 typedef enum {
     N_STMT_LIST, N_STMT_SET, N_STMT_PRINT, N_STMT_READ, N_STMT_IF, N_STMT_WHILE,
-    N_STMT_FUNCDEF, N_STMT_RETURN, N_EXPR_BINARY, N_EXPR_NUMBER, N_EXPR_STRING,
+    N_STMT_FUNCDEF, N_STMT_RETURN,
+    N_STMT_FOR,
+    N_EXPR_BINARY, N_EXPR_NUMBER, N_EXPR_STRING,
     N_EXPR_VAR, N_EXPR_CALL
 } NodeType;
 
@@ -223,6 +230,11 @@ typedef struct Node {
     int param_count; // number of params
     struct Node **args; // for function call args
     int arg_count; // number of args
+    /* for N_STMT_FOR */
+    char *var;          // loop variable name
+    struct Node *from_expr;
+    struct Node *to_expr;
+    struct Node *step_expr;   // optional step (NULL = 1)
 } Node;
 
 typedef struct FuncDef {
@@ -284,7 +296,6 @@ static Var *var_get(const char *name) {
             if (strcmp(v->name, name) == 0) return v;
         }
     }
-    // Also check global scope if we're in some scope
     if (current_scope && current_scope != global_scope) {
         for (Var *v = global_scope->vars; v; v = v->next) {
             if (strcmp(v->name, name) == 0) return v;
@@ -292,9 +303,24 @@ static Var *var_get(const char *name) {
     }
     return NULL;
 }
+static Value value_dup(const Value *v) {
+    Value nv = *v;
+    if (v->type == VAL_STR && v->str) {
+        nv.str = strdup(v->str);
+        if (!nv.str) { perror("strdup"); exit(1); }
+    }
+    return nv;
+}
+static void value_free(Value *v) {
+    if (v->type == VAL_STR && v->str) {
+        free(v->str);
+        v->str = NULL;
+    }
+    v->type = VAL_NONE;
+    v->num = 0.0;
+}
 
 static void var_set(const char *name, Value val) {
-    // First, check if variable exists in CURRENT scope only
     Var *v = NULL;
     if (current_scope) {
         for (v = current_scope->vars; v; v = v->next) {
@@ -307,13 +333,11 @@ static void var_set(const char *name, Value val) {
     }
     
     if (v) {
-        // Found in current scope - overwrite it
         if (v->val.type == VAL_STR && v->val.str) free(v->val.str);
         v->val = val;
         return;
     }
     
-    // Not found in current scope - create new variable in current scope
     v = malloc(sizeof(Var));
     v->name = strdup(name);
     v->val = val;
@@ -427,6 +451,42 @@ static Node *parse_return_stmt(Parser *p) {
     return n;
 }
 
+/* ---------- FOR statement with STEP ---------- */
+static Node *parse_for_stmt(Parser *p) {
+    advance(p);                                   // consume T_FOR
+    if (peek_token(p).type != T_IDENTIFIER) {
+        fprintf(stderr, "Parse error at line %d: expected identifier after 'for'\n", p->lx.line);
+        exit(1);
+    }
+    char *var = strdup(peek_token(p).text);
+    advance(p);
+
+    expect(p, T_FROM, "from");
+    Node *from = parse_expression(p);
+
+    expect(p, T_TO, "to");
+    Node *to = parse_expression(p);
+
+    /* Optional STEP */
+    Node *step = NULL;
+    if (peek_token(p).type == T_IDENTIFIER && strcmp(peek_token(p).text, "step") == 0) {
+        advance(p);  // consume "step"
+        step = parse_expression(p);
+    }
+
+    expect(p, T_LBRACE, "{");
+    Node *body = parse_statements(p);
+    expect(p, T_RBRACE, "}");
+
+    Node *n = node_alloc(N_STMT_FOR);
+    n->var       = var;
+    n->from_expr = from;
+    n->to_expr   = to;
+    n->step_expr = step;
+    n->body      = body;
+    return n;
+}
+
 static Node *parse_factor(Parser *p) {
     Token tk = peek_token(p);
     if (tk.type == T_NUMBER) {
@@ -442,7 +502,7 @@ static Node *parse_factor(Parser *p) {
     } else if (tk.type == T_IDENTIFIER) {
         char *name = strdup(tk.text);
         advance(p);
-        if (peek_token(p).type == T_LPAREN) { // Function call
+        if (peek_token(p).type == T_LPAREN) {
             advance(p);
             Node **args = NULL;
             int arg_count = 0;
@@ -460,7 +520,7 @@ static Node *parse_factor(Parser *p) {
             n->args = args;
             n->arg_count = arg_count;
             return n;
-        } else { // Variable
+        } else {
             Node *n = node_alloc(N_EXPR_VAR);
             n->name = name;
             return n;
@@ -576,6 +636,8 @@ static Node *parse_statements(Parser *p) {
 static Node *parse_statement(Parser *p) {
     while (peek_token(p).type == T_NEWLINE) advance(p);
     Token tk = peek_token(p);
+
+    /* ----- Control-flow and top-level statements ----- */
     if (tk.type == T_SET) {
         advance(p);
         if (peek_token(p).type != T_IDENTIFIER) {
@@ -591,6 +653,7 @@ static Node *parse_statement(Parser *p) {
         n->name = name;
         n->body = expr;
         return n;
+
     } else if (tk.type == T_PRINT) {
         advance(p);
         Node *expr = parse_expression(p);
@@ -598,6 +661,7 @@ static Node *parse_statement(Parser *p) {
         Node *n = node_alloc(N_STMT_PRINT);
         n->body = expr;
         return n;
+
     } else if (tk.type == T_READ) {
         advance(p);
         if (peek_token(p).type != T_IDENTIFIER) {
@@ -610,6 +674,7 @@ static Node *parse_statement(Parser *p) {
         Node *n = node_alloc(N_STMT_READ);
         n->name = name;
         return n;
+
     } else if (tk.type == T_IF) {
         advance(p);
         Node *cond = parse_compare(p);
@@ -628,6 +693,7 @@ static Node *parse_statement(Parser *p) {
         n->body = stmts;
         n->else_body = else_body;
         return n;
+
     } else if (tk.type == T_WHILE) {
         advance(p);
         Node *cond = parse_compare(p);
@@ -639,16 +705,25 @@ static Node *parse_statement(Parser *p) {
         n->cond = cond;
         n->body = stmts;
         return n;
+
     } else if (tk.type == T_FUNCTION) {
         return parse_func_def(p);
+
     } else if (tk.type == T_RETURN) {
         return parse_return_stmt(p);
+
+    } else if (tk.type == T_FOR) {
+        return parse_for_stmt(p);  // for is a full statement — NOT an expression
+
     } else if (tk.type == T_DOT) {
         advance(p);
         return NULL;
+
     } else if (tk.type == T_EOF) {
         return NULL;
+
     } else {
+        /* ----- Only pure expressions become implicit print statements ----- */
         Node *expr = parse_expression(p);
         expect_stmt_terminator(p);
         Node *n = node_alloc(N_STMT_PRINT);
@@ -656,40 +731,29 @@ static Node *parse_statement(Parser *p) {
         return n;
     }
 }
-
 /* ---------- Evaluation ---------- */
-static Value value_dup(const Value *v) {
-    Value nv = *v;
-    if (v->type == VAL_STR && v->str) nv.str = strdup(v->str);
-    return nv;
-}
-
-static void value_free(Value *v) {
-    if (v->type == VAL_STR && v->str) free(v->str);
-    v->type = VAL_NONE;
-    v->num = 0;
-    v->str = NULL;
-}
 
 static Value eval_expr(Node *n);
 static Value eval_stmt(Node *n, int *returned, Value *return_val) {
     if (!n) return (Value){VAL_NONE, 0, NULL};
     if (*returned) return value_dup(return_val);
     switch (n->type) {
-        case N_STMT_LIST: {
+                case N_STMT_LIST: {
             Node *c = n->body;
-            Value last_result = (Value){VAL_NONE, 0, NULL};
+            Value temp = (Value){VAL_NONE, 0, NULL};
             while (c) {
-                value_free(&last_result);
-                last_result = eval_stmt(c, returned, return_val);
+                value_free(&temp);
+                temp = eval_stmt(c, returned, return_val);
                 if (*returned) {
                     Value rv = value_dup(return_val);
-                    value_free(&last_result);
+                    value_free(&temp);
                     return rv;
                 }
                 c = c->next;
             }
-            return last_result;
+            value_free(&temp);
+            /* A program (statement list) never returns a value */
+            return (Value){VAL_NONE, 0, NULL};
         }
         case N_STMT_SET: {
             Value v = eval_expr(n->body);
@@ -757,6 +821,77 @@ static Value eval_stmt(Node *n, int *returned, Value *return_val) {
             }
             return res;
         }
+                case N_STMT_FOR: {
+            /* ---- evaluate bounds and step ---- */
+            Value vfrom = eval_expr(n->from_expr);
+            Value vto   = eval_expr(n->to_expr);
+            Value vstep = (Value){VAL_NUM, 1.0, NULL};
+
+            if (n->step_expr) {
+                vstep = eval_expr(n->step_expr);
+                if (vstep.type != VAL_NUM) {
+                    fprintf(stderr, "Error: step must be numeric\n");
+                    value_free(&vfrom); value_free(&vto); value_free(&vstep);
+                    exit(1);
+                }
+            }
+
+            if (vfrom.type != VAL_NUM || vto.type != VAL_NUM) {
+                fprintf(stderr, "Error: for-loop bounds must be numeric\n");
+                value_free(&vfrom); value_free(&vto); value_free(&vstep);
+                exit(1);
+            }
+
+            double start    = vfrom.num;
+            double end      = vto.num;
+            double step_val = vstep.num;
+
+            value_free(&vfrom);
+            value_free(&vto);
+            value_free(&vstep);
+
+            if (step_val == 0.0) {
+                fprintf(stderr, "Error: step cannot be zero\n");
+                exit(1);
+            }
+
+            Value res = (Value){VAL_NONE, 0, NULL};
+
+            /* ---- compute safe number of iterations ---- */
+            long max_iters;
+            if (step_val > 0.0) {
+                /* (end - start) / step + 1  →  floor to avoid overshoot */
+                double diff = end - start;
+                if (diff < 0.0) { max_iters = 0; }
+                else            { max_iters = (long)floor(diff / step_val) + 1; }
+            } else {
+                double diff = start - end;
+                if (diff < 0.0) { max_iters = 0; }
+                else            { max_iters = (long)floor(diff / (-step_val)) + 1; }
+            }
+
+            for (long iter = 0; iter < max_iters; ++iter) {
+                double current = start + iter * step_val;
+
+                /* final safeguard – clamp to the exact bound */
+                if ((step_val > 0.0 && current > end + 1e-9) ||
+                    (step_val < 0.0 && current < end - 1e-9)) {
+                    break;
+                }
+
+                Value iv = {VAL_NUM, current, NULL};
+                var_set(n->var, iv);          /* set loop variable */
+
+                value_free(&res);
+                res = eval_stmt(n->body, returned, return_val);
+                if (*returned) {
+                    Value rv = value_dup(return_val);
+                    value_free(&res);
+                    return rv;
+                }
+            }
+            return res;
+        }
         case N_STMT_FUNCDEF: {
             func_set(n->name, n->params, n->param_count, n->body);
             return (Value){VAL_NONE, 0, NULL};
@@ -790,54 +925,59 @@ static Value eval_expr(Node *n) {
             }
             return value_dup(&v->val);
         }
-        case N_EXPR_CALL: {
+                case N_EXPR_CALL: {
             FuncDef *f = func_get(n->name);
-            if (!f) { fprintf(stderr, "Error: Undefined function %s\n", n->name); exit(1); }
+            if (!f) {
+                fprintf(stderr, "Error: Undefined function %s\n", n->name);
+                exit(1);
+            }
             if (f->param_count != n->arg_count) {
-                fprintf(stderr, "Error: Function %s expects %d args, got %d\n", 
+                fprintf(stderr, "Error: Function %s expects %d args, got %d\n",
                         n->name, f->param_count, n->arg_count);
                 exit(1);
             }
-            
-            // CRITICAL FIX: Evaluate ALL arguments BEFORE pushing new scope
+
+            /* ---- Evaluate all arguments ---- */
             Value *arg_values = malloc(f->param_count * sizeof(Value));
+            if (!arg_values) { perror("malloc"); exit(1); }
+
             for (int i = 0; i < f->param_count; i++) {
                 arg_values[i] = eval_expr(n->args[i]);
-                // Evaluate in current scope before creating new one
             }
-            
-            // Create new scope for function call
+
+            /* ---- Push new scope and bind parameters ---- */
             push_scope();
-            
-            // Set parameters in the new scope
             for (int i = 0; i < f->param_count; i++) {
-                var_set(f->params[i], arg_values[i]);
-                value_free(&arg_values[i]); // Clean up temporary value
+                var_set(f->params[i], arg_values[i]);   /* deep copy via value_dup */
+                /* DO NOT free here — function body may still use the string */
             }
-            free(arg_values);
-            
-            // Execute function body
+
+            /* ---- Execute function body ---- */
             int func_returned = 0;
             Value func_return_value = {VAL_NONE, 0, NULL};
             Value func_result = eval_stmt(f->body, &func_returned, &func_return_value);
-            
-            // Clean up the function's scope
+
+            /* ---- Clean up scope ---- */
             pop_scope();
-            
-            // Return the appropriate value
+
+            /* ---- NOW safe to free argument values ---- */
+            for (int i = 0; i < f->param_count; i++) {
+                value_free(&arg_values[i]);
+            }
+            free(arg_values);
+
+            /* ---- Return result ---- */
             Value final_result;
             if (func_returned) {
                 final_result = value_dup(&func_return_value);
                 value_free(&func_result);
+                value_free(&func_return_value);
             } else {
-                final_result = func_result; // func_result is already a copy
+                final_result = func_result;
             }
-            
-            // Clean up
-            value_free(&func_return_value);
+
             return final_result;
         }
-
         case N_EXPR_BINARY: {
             Value l = eval_expr(n->left);
             Value r = eval_expr(n->right);
@@ -892,6 +1032,7 @@ static void free_node(Node *n) {
     if (!n) return;
     if (n->name) free(n->name);
     if (n->string) free(n->string);
+    if (n->var) free(n->var);
     if (n->params) {
         for (int i = 0; i < n->param_count; i++) free(n->params[i]);
         free(n->params);
@@ -905,6 +1046,9 @@ static void free_node(Node *n) {
     free_node(n->cond);
     free_node(n->body);
     free_node(n->else_body);
+    free_node(n->from_expr);
+    free_node(n->to_expr);
+    free_node(n->step_expr);
     free_node(n->next);
     free(n);
 }
@@ -923,28 +1067,41 @@ static void free_func_table() {
 
 /* ---------- Main ---------- */
 int main(int argc, char **argv) {
-    if (argc < 2) { fprintf(stderr, "Usage: %s file.elang\n", argv[0]); return 1; }
+    if (argc < 2) { 
+        fprintf(stderr, "Usage: %s file.elang\n", argv[0]); 
+        return 1; 
+    }
+
     FILE *f = fopen(argv[1], "rb");
     if (!f) { perror("fopen"); return 1; }
+
     fseek(f, 0, SEEK_END);
     long sz = ftell(f);
     fseek(f, 0, SEEK_SET);
+
     char *src = malloc(sz + 1);
+    if (!src) { fprintf(stderr, "out of memory\n"); fclose(f); return 1; }
     fread(src, 1, sz, f);
-    src[sz] = 0;
+    src[sz] = '\0';
     fclose(f);
+
     Parser p = {.lx = {.src = src, .pos = 0, .line = 1}};
     push_scope();
     advance(&p);
+
     Node *ast = parse_statements(&p);
+
     int returned = 0;
     Value return_val = (Value){VAL_NONE, 0, NULL};
-    Value main_res = eval_stmt(ast, &returned, &return_val);
-    value_free(&main_res);
+
+    /* Execute — ignore any return value */
+    eval_stmt(ast, &returned, &return_val);
+
     value_free(&return_val);
     free_node(ast);
     free_func_table();
     while (current_scope) pop_scope();
     free(src);
+
     return 0;
 }

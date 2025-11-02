@@ -1,0 +1,7 @@
+function square(x) {
+    return x * x
+}
+
+for i from 1 to 5 {
+    print i + "^2 = " + square(i)
+}

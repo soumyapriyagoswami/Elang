@@ -1,0 +1,6 @@
+for i from 1 to 3 {
+    for j from 1 to 10 {
+        print i + " x " + j + " = " + (i * j)
+    }
+    print "---"
+}

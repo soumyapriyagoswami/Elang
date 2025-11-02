@@ -1,0 +1,18 @@
+function gcd(a, b) {
+    print "Calculating gcd("
+    print a
+    print ", "
+    print b
+    print ")"
+    
+    if b == 0 then
+        return a
+    end
+    
+    return gcd(b, a % b)
+}
+
+print "GCD of 48 and 18:"
+set result to gcd(48, 18)
+print "Result: "
+print result

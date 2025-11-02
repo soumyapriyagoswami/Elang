@@ -1,0 +1,111 @@
+
+
+     
+
+function add_task(desc) {
+    /* push description */
+    set tasks      to tasks + [desc]
+    /* push status (0 = pending) */
+    set completed  to completed + [0]
+    print "Added: " + desc
+}
+
+function list_tasks() {
+    if tasks[0] == "" then {
+        print "No tasks yet."
+    } else {
+        for (i=0; i<tasks.length; i=i+1) {
+            set status to ""
+            if completed[i] == 1 then {
+                set status to " [DONE]"
+            } else {
+                set status to " [    ]"
+            }
+            print (i+1) + ". " + tasks[i] + status
+        }
+    }
+}
+
+function mark_done(idx) {
+    /* idx is 1-based from the user */
+    set real = idx - 1
+    if real < 0 or real >= tasks.length then {
+        print "Invalid task number."
+    } else {
+        if completed[real] == 1 then {
+            print "Task already completed."
+        } else {
+            set completed[real] to 1
+            print "Marked task " + idx + " as DONE."
+        }
+    }
+}
+
+/* -------------------------------------------------------------
+   Main interactive loop
+   ------------------------------------------------------------- */
+print "=== eLang To-Do List ==="
+print "Commands: add <text> | list | done <num> | quit"
+
+while (true) {
+    print ""
+    print "> "
+    read line
+
+    /* trim trailing newline (read adds it) */
+    set cmd to line
+
+    /* split first word */
+    set space_pos to -1
+    for (i=0; i<cmd.length; i=i+1) {
+        if cmd[i] == " " then {
+            set space_pos to i
+            break
+        }
+    }
+
+    if space_pos == -1 then {
+        set verb to cmd
+        set rest to ""
+    } else {
+        set verb to cmd[0 .. space_pos-1]
+        set rest to cmd[space_pos+1 .. cmd.length-1]
+    }
+
+    /* ----- command dispatch ----- */
+    if verb == "add" then {
+        if rest == "" then {
+            print "Usage: add <task description>"
+        } else {
+            add_task(rest)
+        }
+    }
+    else if verb == "list" then {
+        list_tasks()
+    }
+    else if verb == "done" then {
+        /* convert rest to number */
+        set num to 0
+        for (i=0; i<rest.length; i=i+1) {
+            set ch to rest[i]
+            if ch >= "0" and ch <= "9" then {
+                set num to num * 10 + (ch - "0")
+            } else {
+                set num to -1
+                break
+            }
+        }
+        if num <= 0 then {
+            print "Usage: done <task number>"
+        } else {
+            mark_done(num)
+        }
+    }
+    else if verb == "quit" then {
+        print "Bye!"
+        break
+    }
+    else {
+        print "Unknown command. Try: add, list, done, quit"
+    }
+}

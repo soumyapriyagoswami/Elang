@@ -26,23 +26,25 @@ while quit == 0 do
                     print "Too low! Try higher."
                 else
                     print "Too high! Try lower."
-                                                                                             end
+                end
             end
-        endif guess == secret then
+        end
+        if guess == secret then
             print "Correct! You guessed it in " + attempts + " attempts."
             # Simple score (lower attempts = higher score)
-                                                                                                                              set score to 100 - (attempts * 5)
+            set score to 100 - (attempts * 5)
             if score < 0 then
                 set score to 0
             end
             print "Your score: " + score
         else
             print "You gave up. The number was " + secret + "."
-        end
+         end
         print "Press enter to continue..."
         read dummy  # Pause with dummy read (enter a number like 0 to continue)
     else
-        if choice == 2 then print "=== High Scores ==="
+        if choice == 2 then
+            print "=== High Scores ==="
             print "1. Player1 - 95"
             print "2. Player2 - 87"
             print "3. Player3 - 76"
