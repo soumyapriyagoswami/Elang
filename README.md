@@ -1,4 +1,4 @@
-<h1 align="center">🌈 <b>EasyLang — The Language That Thinks Like You</b></h1>
+<h1 align="center">🌈 <b>eLang — The Language That Thinks Like You</b></h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Made%20with-C99-orange.svg">
@@ -11,14 +11,14 @@
 
 ## 🧠 **Project Description**
 
-**EasyLang** is a **minimalist, interpreted programming language** designed to make algorithmic thinking accessible and fun for **students, hobbyists, and educators**.  
+**eLang** is a **minimalist, interpreted programming language** designed to make algorithmic thinking accessible and fun for **students, hobbyists, and educators**.  
 
 Say goodbye to syntax clutter—focus purely on **ideas, loops, and logic**.  
-With **English-like constructs**, EasyLang turns complex code into human-friendly expression, letting you **prototype algorithms in minutes, not hours.**
+With **English-like constructs**, eLang turns complex code into human-friendly expression, letting you **prototype algorithms in minutes, not hours.**
 
 ---
 
-## 🌟 **Why EasyLang? – The Features That Shine**
+## 🌟 **Why eLang? – The Features That Shine**
 
 ### 🚀 **Ultra-Simple Syntax**
 - ❌ **No Indentation Rules:** Write code freely—no tabs or spaces stress.  
@@ -86,45 +86,45 @@ With **English-like constructs**, EasyLang turns complex code into human-friendl
 ### Steps
 1. Clone this repository:
 ```bash
-git clone https://github.com/soumyapriyagoswami/EasyLang.git
-cd EasyLang
-./easylang
+git clone https://github.com/soumyapriyagoswami/eLang.git
+cd eLang
+./eLang
 ```
-Create a sample EasyLang script hello.easylang:
+Create a sample eLang script hello.eLang:
 
 ```bash
-print("Hello, EasyLang!")
+print("Hello, eLang!")
 ```
 
 Run the script:
 ```bash
-./easylang hello.elang
+./eLang hello.elang
 ```
 
 Expected output:
 ```bash
-Hello, EasyLang!
+Hello, eLang!
 ```
 
-You can experiment with variables, loops, and functions following EasyLang’s simple syntax. More examples will be added soon.
+You can experiment with variables, loops, and functions following eLang’s simple syntax. More examples will be added soon.
 
 ## Documentation
 
 Full documentation is available as a PDF:
 
-[Download EasyLang Documentation](documentation/easylang_documentation.pdf)
+[Download eLang Documentation](documentation/eLang_documentation.pdf)
 
 ## 🚀 **Quick Start Examples**
 
 ### 🧾 Basic Variables and Output
-```easylang
-set name to "EasyLang"
+```eLang
+set name to "eLang"
 set version to 1.0
 print "Welcome to " + name + " v" + version
 ```
 
 ### 🎯 Conditional Logic
-```easylang
+```eLang
 set age to 20
 if age >= 18 then
     print "You are an adult"
@@ -133,7 +133,7 @@ else
 end
 ```
 ###  🧮 Functions Without Recursion
-```easylang
+```eLang
 function max(a, b) {
     if a > b then
         return a
@@ -151,7 +151,7 @@ print "Circle area: " + circle_area(5)
 ```
 
 ### 🔂 Advanced Recursive Functions
-```easylang
+```eLang
 # Fibonacci sequence
 function fib(n) {
     if n <= 1 then
@@ -196,7 +196,7 @@ hanoi(3, "A", "C", "B")
 
 We welcome contributions from everyone! 🚀  
 
-Here’s how you can help improve **EasyLang**:
+Here’s how you can help improve **eLang**:
 
 1. **Fork** the repository  
 2. **Create** a feature branch  
@@ -208,5 +208,5 @@ Let’s make coding education easier together ❤️
 ---
 
 ### 🌟 Start coding in minutes, not hours.  
-**Experience the simplicity of EasyLang today! 🚀**
+**Experience the simplicity of eLang today! 🚀**
 
