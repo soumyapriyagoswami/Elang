@@ -1,27 +1,34 @@
 <div align="center">
 
-```
-███████╗██╗      █████╗ ███╗   ██╗ ██████╗
-██╔════╝██║     ██╔══██╗████╗  ██║██╔════╝
-█████╗  ██║     ███████║██╔██╗ ██║██║  ███╗
-██╔══╝  ██║     ██╔══██║██║╚██╗██║██║   ██║
-███████╗███████╗██║  ██║██║ ╚████║╚██████╔╝
-╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝
-```
-
-### *The Language That Thinks Like You*
+<picture>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=eLang&fontSize=80&fontAlignY=35&desc=The%20Language%20That%20Thinks%20Like%20You&descAlignY=58&descSize=20&fontColor=ffffff&animation=fadeIn" width="100%"/>
+</picture>
 
 <br>
 
-[![Made with C99](https://img.shields.io/badge/Made%20with-C99-FF6B35?style=flat-square&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C99)
-[![License BSD 2-Clause](https://img.shields.io/badge/License-BSD%202--Clause-4A90D9?style=flat-square)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-2ECC71?style=flat-square&logo=linux&logoColor=white)](https://github.com/soumyapriyagoswami/eLang)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
-[![Open Source](https://img.shields.io/badge/Open%20Source-❤-E74C3C?style=flat-square)](https://github.com/soumyapriyagoswami/eLang)
+<!-- Animated typing effect via readme-typing-svg -->
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=58A6FF&center=true&vCenter=true&width=600&lines=Minimalist+%7C+Interpreted+%7C+Built+in+C;No+semicolons.+No+braces.+Just+ideas.;Prototype+algorithms+in+minutes%2C+not+hours.;English-like+syntax+%E2%80%94+anyone+can+read+it.)](https://github.com/soumyapriyagoswami/eLang)
 
 <br>
 
-> *"Stop wrestling syntax. Start writing ideas."*
+[![Made with C99](https://img.shields.io/badge/Made%20with-C99-FF6B35?style=for-the-badge&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C99)
+[![License BSD 2-Clause](https://img.shields.io/badge/License-BSD%202--Clause-4A90D9?style=for-the-badge)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-2ECC71?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/soumyapriyagoswami/eLang)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-FF69B4?style=for-the-badge)](CONTRIBUTING.md)
+[![Open Source](https://img.shields.io/badge/Open%20Source-❤-E74C3C?style=for-the-badge)](https://github.com/soumyapriyagoswami/eLang)
+[![Star on GitHub](https://img.shields.io/github/stars/soumyapriyagoswami/eLang?style=for-the-badge&logo=github&color=yellow)](https://github.com/soumyapriyagoswami/eLang)
+
+<br>
+
+> ### *"Stop wrestling syntax. Start writing ideas."*
+
+<br>
+
+---
+
+<sub>Crafted with ❤️ by <a href="https://github.com/soumyapriyagoswami"><b>Soumyapriya Goswami</b></a></sub>
+
+---
 
 </div>
 
@@ -226,11 +233,20 @@ Whether it's fixing a bug, extending the language, or improving docs — every c
 
 <div align="center">
 
+<br>
+
 **Start coding in minutes, not hours.**  
-*Experience the simplicity of eLang today.*
+*Experience the simplicity of eLang today.* 🚀
 
 <br>
 
-[![Star on GitHub](https://img.shields.io/github/stars/soumyapriyagoswami/eLang?style=social)](https://github.com/soumyapriyagoswami/eLang)
+[![Star on GitHub](https://img.shields.io/github/stars/soumyapriyagoswami/eLang?style=for-the-badge&logo=github&color=yellow)](https://github.com/soumyapriyagoswami/eLang)
+[![Follow](https://img.shields.io/github/followers/soumyapriyagoswami?label=Follow%20Soumyapriya&style=for-the-badge&logo=github&color=58A6FF)](https://github.com/soumyapriyagoswami)
+
+<br>
+
+<picture>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer&animation=fadeIn" width="100%"/>
+</picture>
 
 </div>
