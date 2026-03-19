@@ -1,130 +1,134 @@
-<h1 align="center">🌈 <b>eLang — The Language That Thinks Like You</b></h1>
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Made%20with-C99-orange.svg">
-  <img src="https://img.shields.io/badge/License-BSD%202--Clause-blue.svg">
-  <img src="https://img.shields.io/badge/Platform-Linux%20|%20macOS%20|%20Windows-green.svg">
-</p>
+```
+███████╗██╗      █████╗ ███╗   ██╗ ██████╗
+██╔════╝██║     ██╔══██╗████╗  ██║██╔════╝
+█████╗  ██║     ███████║██╔██╗ ██║██║  ███╗
+██╔══╝  ██║     ██╔══██║██║╚██╗██║██║   ██║
+███████╗███████╗██║  ██║██║ ╚████║╚██████╔╝
+╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝
+```
 
+### *The Language That Thinks Like You*
 
----
+<br>
 
-## 🧠 **Project Description**
+[![Made with C99](https://img.shields.io/badge/Made%20with-C99-FF6B35?style=flat-square&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C99)
+[![License BSD 2-Clause](https://img.shields.io/badge/License-BSD%202--Clause-4A90D9?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-2ECC71?style=flat-square&logo=linux&logoColor=white)](https://github.com/soumyapriyagoswami/eLang)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
+[![Open Source](https://img.shields.io/badge/Open%20Source-❤-E74C3C?style=flat-square)](https://github.com/soumyapriyagoswami/eLang)
 
-**eLang** is a **minimalist, interpreted programming language** designed to make algorithmic thinking accessible and fun for **students, hobbyists, and educators**.  
+<br>
 
-Say goodbye to syntax clutter—focus purely on **ideas, loops, and logic**.  
-With **English-like constructs**, eLang turns complex code into human-friendly expression, letting you **prototype algorithms in minutes, not hours.**
+> *"Stop wrestling syntax. Start writing ideas."*
 
----
-
-## 🌟 **Why eLang? – The Features That Shine**
-
-### 🚀 **Ultra-Simple Syntax**
-- ❌ **No Indentation Rules:** Write code freely—no tabs or spaces stress.  
-- ❌ **No Semicolons or Braces:** Statements end naturally.  
-- 🗣️ **English-like Constructs:** Code that reads like plain English.  
-- 🎯 **Minimal Punctuation:** Focus on logic, not syntax memorization.  
-
-### 🔥 **Dynamic and Forgiving Typing**
-- ✨ `set x to 5` creates a variable instantly.  
-- 🔁 Auto type handling: mix strings and numbers seamlessly.  
-- 🚫 No declarations—just start coding.  
-- 🧩 Variables are flexible: switch types dynamically.  
-
-### ⚡ **Blazing Performance in a Tiny Package**
-- 💾 Single-file interpreter (~500 lines of C).  
-- 📦 Under **1 MB binary**, runs anywhere.  
-- 🧠 Optimized for quick prototyping and execution.  
-- 💻 Cross-platform: Linux, macOS, Windows (MinGW/WSL).  
-
-### 🎯 **Rich Control Structures**
-- 🔄 `if-then-else-end` with natural English flow.  
-- 🔁 `while-do-end` for looping.  
-- ⚖️ Full comparison set (`==`, `!=`, `<`, `>`, `<=`, `>=`, `and`).  
-- 🧩 Nested control flow for complex logic.  
-
-### 🧮 **Complete Function System**
-- 🧠 Define with `function name(params) { body }`.  
-- 📬 Pass multiple parameters, return values easily.  
-- 🧍‍♂️ Local scope for each function call.  
-- 🔁 Recursion supported natively.  
-
-### 🔄 **Advanced Recursion Capabilities**
-- 🏗️ Solve **Tower of Hanoi**, compute **Fibonacci**, **GCD**, **Factorial**.  
-- 🧩 Perfect for teaching recursion and scope handling.  
-
-### 📚 **Built-in Essentials**
-- 🖨️ `print`, `read` for I/O.  
-- ➕ `+ - * / %` arithmetic with precedence.  
-- 🧵 String operations and concatenation.  
-- 💬 `#` for single-line comments.  
-
-### 🎓 **Educational Powerhouse**
-- 🏫 Ideal for **classrooms and workshops**.  
-- ⚙️ Quick prototyping environment.  
-- 🧠 Focused on **algorithmic clarity** over syntax.  
-- 💡 Zero setup: just download and run.  
-
-### 🔧 **Extensible and Hackable**
-- 🔓 Open Source (BSD 2-Clause).  
-- 🧩 Easy to extend lexer, parser, and evaluator.  
-- 🧬 Create your own language dialects.  
-- 🌍 Built by and for the programming education community.  
-
-
-
+</div>
 
 ---
 
-## Installation
+<br>
+
+## ◈ What is eLang?
+
+**eLang** is a **minimalist, interpreted programming language** built in pure C — designed to make algorithmic thinking accessible and joyful for **students, hobbyists, and educators**.
+
+No semicolons. No braces. No indentation rules.  
+Just **clean, English-like code** that lets you prototype algorithms in minutes.
+
+```elang
+set name to "eLang"
+if name == "eLang" then
+    print "Hello, world. You found me."
+end
+```
+
+<br>
+
+---
+
+## ◈ Feature Highlights
+
+<br>
+
+**✦ Ultra-Simple Syntax**
+> No indentation rules · No semicolons · No braces  
+> English-like constructs · Minimal punctuation — focus on *logic*, not ceremony.
+
+**✦ Dynamic, Forgiving Typing**
+> `set x to 5` — that's it. No declarations, no type annotations.  
+> Mix strings and numbers. Switch types on the fly.
+
+**✦ Blazing Fast & Tiny**
+> ~500 lines of C · Under **1 MB** binary  
+> Cross-platform: Linux, macOS, Windows (MinGW/WSL)
+
+**✦ Rich Control Flow**
+> `if–then–else–end` · `while–do–end`  
+> Full comparisons: `== != < > <= >= and`  
+> Arbitrarily nested logic — no limits.
+
+**✦ Complete Function System**
+> `function name(params) { body }`  
+> Multiple parameters · Return values · Local scope · Native recursion
+
+**✦ Educational Powerhouse**
+> Zero setup · Classroom-ready · Recursion-first pedagogy  
+> Ideal for teaching Tower of Hanoi, Fibonacci, GCD, Factorial
+
+<br>
+
+---
+
+## ◈ Getting Started
 
 ### Prerequisites
-- GCC or any C compiler
-- Linux / macOS / Windows (with MinGW or WSL for Windows)
 
-### Steps
-1. Clone this repository:
+- GCC or any C99-compliant compiler
+- Linux / macOS / Windows (MinGW or WSL)
+
+### Install in 30 seconds
+
 ```bash
 git clone https://github.com/soumyapriyagoswami/eLang.git
 cd eLang
 ./eLang
 ```
-Create a sample eLang script hello.eLang:
 
-```bash
+### Run your first program
+
+Create `hello.elang`:
+```elang
 print("Hello, eLang!")
 ```
 
-Run the script:
+Execute it:
 ```bash
 ./eLang hello.elang
+# → Hello, eLang!
 ```
 
-Expected output:
-```bash
-Hello, eLang!
-```
+<br>
 
-You can experiment with variables, loops, and functions following eLang’s simple syntax. More examples will be added soon.
+---
 
-## Documentation
+## ◈ Code Examples
 
-Full documentation is available as a PDF:
+<br>
 
-[Download eLang Documentation](documentation/eLang_documentation.pdf)
+### Variables & Output
 
-## 🚀 **Quick Start Examples**
-
-### 🧾 Basic Variables and Output
-```eLang
-set name to "eLang"
+```elang
+set name    to "eLang"
 set version to 1.0
 print "Welcome to " + name + " v" + version
 ```
 
-### 🎯 Conditional Logic
-```eLang
+<br>
+
+### Conditional Logic
+
+```elang
 set age to 20
 if age >= 18 then
     print "You are an adult"
@@ -132,8 +136,12 @@ else
     print "You are a minor"
 end
 ```
-###  🧮 Functions Without Recursion
-```eLang
+
+<br>
+
+### Functions
+
+```elang
 function max(a, b) {
     if a > b then
         return a
@@ -147,12 +155,15 @@ function circle_area(radius) {
 }
 
 print "Larger number: " + max(5, 3)
-print "Circle area: " + circle_area(5)
+print "Circle area:   " + circle_area(5)
 ```
 
-### 🔂 Advanced Recursive Functions
-```eLang
-# Fibonacci sequence
+<br>
+
+### Recursion — Classic Algorithms
+
+```elang
+# ── Fibonacci ────────────────────────────────────
 function fib(n) {
     if n <= 1 then
         return n
@@ -160,7 +171,7 @@ function fib(n) {
     return fib(n - 1) + fib(n - 2)
 }
 
-# Factorial
+# ── Factorial ────────────────────────────────────
 function fact(n) {
     if n <= 1 then
         return 1
@@ -168,7 +179,7 @@ function fact(n) {
     return n * fact(n - 1)
 }
 
-# Tower of Hanoi
+# ── Tower of Hanoi ───────────────────────────────
 function hanoi(n, from, to, aux) {
     if n == 1 then
         print "Move disk 1 from " + from + " to " + to
@@ -179,34 +190,47 @@ function hanoi(n, from, to, aux) {
     hanoi(n - 1, aux, to, from)
 }
 
-print "Fibonacci(6): " + fib(6)
-print "Factorial(5): " + fact(5)
-print "Tower of Hanoi with 3 disks:"
+print "Fibonacci(6):  " + fib(6)
+print "Factorial(5):  " + fact(5)
+print "Tower of Hanoi (3 disks):"
 hanoi(3, "A", "C", "B")
-
 ```
-## 🤝 Contributing
 
-<p align="center">
-  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome">
-  <img src="https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg?style=for-the-badge" alt="Open Source Love">
-  <img src="https://img.shields.io/badge/Contributions-Encouraged-blue.svg?style=for-the-badge" alt="Contributions Encouraged">
-  <img src="https://img.shields.io/badge/Made%20with-%F0%9F%92%9A%20Passion-yellow.svg?style=for-the-badge" alt="Made with Passion">
-</p>
-
-We welcome contributions from everyone! 🚀  
-
-Here’s how you can help improve **eLang**:
-
-1. **Fork** the repository  
-2. **Create** a feature branch  
-3. **Commit** your changes  
-4. **Submit** a pull request  
-
-Let’s make coding education easier together ❤️  
+<br>
 
 ---
 
-### 🌟 Start coding in minutes, not hours.  
-**Experience the simplicity of eLang today! 🚀**
+## ◈ Documentation
 
+Full language reference available as a PDF:
+
+📄 **[Download eLang Documentation](documentation/eLang_documentation.pdf)**
+
+<br>
+
+---
+
+## ◈ Contributing
+
+eLang is open source and built by its community. Contributions of all kinds are welcome.
+
+```
+1. Fork  →  2. Branch  →  3. Commit  →  4. Pull Request
+```
+
+Whether it's fixing a bug, extending the language, or improving docs — every contribution matters. Let's make programming education more human together. ❤️
+
+<br>
+
+---
+
+<div align="center">
+
+**Start coding in minutes, not hours.**  
+*Experience the simplicity of eLang today.*
+
+<br>
+
+[![Star on GitHub](https://img.shields.io/github/stars/soumyapriyagoswami/eLang?style=social)](https://github.com/soumyapriyagoswami/eLang)
+
+</div>
